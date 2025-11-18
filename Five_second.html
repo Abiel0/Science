@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Rules - 5 Second Rule Investigation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: #0a0e27;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 157, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 157, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00ff9d;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            border: 2px solid #00ff9d;
+            padding: 1rem 2rem;
+            animation: flicker 3s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin: 2rem 0;
+            color: #00ff9d;
+            animation: fadeIn 1.5s ease;
+            max-width: 1000px;
+            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #7a8a99;
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 1px solid #00ff9d;
+            color: #00ff9d;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Courier New', Courier, monospace;
+            position: relative;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: #00ff9d;
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-btn:hover::before {
+            width: 100%;
+        }
+
+        .nav-btn:hover {
+            color: #0a0e27;
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section.active {
+            display: block;
+            animation: slideIn 0.6s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #00ff9d;
+            margin-bottom: 3rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            border-bottom: 2px solid #00ff9d;
+            padding-bottom: 1rem;
+        }
+
+        .card {
+            background: rgba(10, 14, 39, 0.6);
+            border: 1px solid #00ff9d;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid #00ff9d;
+            border-left: 2px solid #00ff9d;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            right: -1px;
+            width: 20px;
+            height: 20px;
+            border-bottom: 2px solid #00ff9d;
+            border-right: 2px solid #00ff9d;
+        }
+
+        .card h3 {
+            color: #00ff9d;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .card p, .card li {
+            line-height: 1.8;
+            color: #c0c0c0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .card li::before {
+            content: '►';
+            color: #00ff9d;
+            position: absolute;
+            left: 0;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 1px solid #00ff9d;
+            color: #00ff9d;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .back-btn:hover {
+            background: #00ff9d;
+            color: #0a0e27;
+        }
+
+        .home-btn {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 1px solid #00ff9d;
+            color: #00ff9d;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .home-btn:hover {
+            background: #00ff9d;
+            color: #0a0e27;
+        }
+
+        .home-overview {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .about-section {
+            max-width: 1200px;
+            margin: 3rem auto 2rem;
+            padding: 0 2rem 3rem;
+            text-align: center;
+        }
+
+        .about-box {
+            background: rgba(0, 255, 157, 0.05);
+            border: 1px solid #00ff9d;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .about-box::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid #00ff9d;
+            border-left: 2px solid #00ff9d;
+        }
+
+        .about-box::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            right: -1px;
+            width: 20px;
+            height: 20px;
+            border-bottom: 2px solid #00ff9d;
+            border-right: 2px solid #00ff9d;
+        }
+
+        .about-box h3 {
+            color: #00ff9d;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .about-box p {
+            color: #c0c0c0;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .overview-card {
+            background: rgba(0, 255, 157, 0.05);
+            border: 1px solid #00ff9d;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .overview-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid #00ff9d;
+            border-left: 2px solid #00ff9d;
+        }
+
+        .overview-card::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            right: -1px;
+            width: 20px;
+            height: 20px;
+            border-bottom: 2px solid #00ff9d;
+            border-right: 2px solid #00ff9d;
+        }
+
+        .overview-card:hover {
+            background: rgba(0, 255, 157, 0.1);
+        }
+
+        .overview-card h3 {
+            color: #00ff9d;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .overview-card p {
+            color: #c0c0c0;
+            line-height: 1.8;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .highlight {
+            color: #00ff9d;
+            font-weight: 600;
+        }
+
+        .data-box {
+            background: rgba(0, 255, 157, 0.05);
+            border: 1px solid #00ff9d;
+            padding: 1rem;
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+
+        .data-box h4 {
+            color: #00ff9d;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .data-box p {
+            font-size: 2rem;
+            color: #00ff9d;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        table th, table td {
+            border: 1px solid #00ff9d;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        table th {
+            background: rgba(0, 255, 157, 0.1);
+            color: #00ff9d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .summary-section {
+            background: rgba(0, 255, 157, 0.05);
+            border: 1px solid #00ff9d;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .summary-section.hidden {
+            display: none;
+        }
+
+        .summary-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #c0c0c0;
+            margin-bottom: 1.5rem;
+        }
+
+        .deep-dive-btn {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 1px solid #00ff9d;
+            color: #00ff9d;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Courier New', Courier, monospace;
+            width: 100%;
+            position: relative;
+        }
+
+        .deep-dive-btn::before {
+            content: '▼ ';
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .deep-dive-btn:hover {
+            background: #00ff9d;
+            color: #0a0e27;
+        }
+
+        .deep-content {
+            display: none;
+        }
+
+        .deep-content.active {
+            display: block;
+            animation: slideIn 0.6s ease;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            table {
+                font-size: 0.9rem;
+            }
+            table th, table td {
+                padding: 0.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { 
+                font-size: 1.5rem; 
+                letter-spacing: 1px;
+            }
+            .logo {
+                font-size: 1.2rem;
+                letter-spacing: 4px;
+                padding: 0.8rem 1.5rem;
+            }
+            .section-title { 
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+            .nav-btn { 
+                padding: 0.8rem 1.2rem; 
+                font-size: 0.75rem;
+                letter-spacing: 1px;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+            .card h3 {
+                font-size: 1.1rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .back-btn, .home-btn {
+                top: 1rem;
+                padding: 0.6rem 1rem;
+                font-size: 0.75rem;
+            }
+            .back-btn {
+                left: 1rem;
+            }
+            .home-btn {
+                right: 1rem;
+            }
+            .overview-card {
+                padding: 1.5rem;
+            }
+            .overview-card h3 {
+                font-size: 1.2rem;
+            }
+            .home-overview {
+                padding: 0 1rem;
+            }
+            .about-section {
+                padding: 0 1rem 2rem;
+            }
+            table {
+                font-size: 0.75rem;
+            }
+            table th, table td {
+                padding: 0.5rem;
+            }
+            .section {
+                padding: 2rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.2rem;
+            }
+            .subtitle {
+                font-size: 0.8rem;
+            }
+            .nav {
+                gap: 0.5rem;
+            }
+            .nav-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.7rem;
+            }
+            .section-title {
+                font-size: 1.2rem;
+            }
+            .card h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-background"></div>
+
+    <div id="home" class="hero">
+        <div class="logo">Science Rules</div>
+        <h1>Breaking the 5 Second Rule</h1>
+        <p class="subtitle">How Does Time on the Floor Affect Bacterial Transfer?</p>
+        
+        <div class="home-overview">
+            <div class="overview-card">
+                <h3>Introduction</h3>
+                <p>The 5 second rule is an urban myth stating that food dropped on the floor is safe to eat if picked up within 5 seconds. This investigation examines whether increasing contact time with the floor increases bacterial contamination, with implications for student health and public food safety practices.</p>
+                <button class="deep-dive-btn" onclick="showSection('introduction')">Deep Dive</button>
+            </div>
+
+            <div class="overview-card">
+                <h3>Hypothesis</h3>
+                <p>Increasing the length of time food is in contact with the floor increases the number of bacteria on the food. If proven true, this widely-used "rule" poses significant health risks through exposure to pathogens like Salmonella, Campylobacter, and E. coli.</p>
+                <button class="deep-dive-btn" onclick="showSection('hypothesis')">Deep Dive</button>
+            </div>
+
+            <div class="overview-card">
+                <h3>Methodology</h3>
+                <p>Four experiments were conducted in the school canteen using agar plates and various foods (bread, Crunchies, Lunchables). Food samples were dropped from 12.5cm height onto the floor for 5 and 30 seconds, then cultured on agar plates for one week to count bacterial colonies.</p>
+                <button class="deep-dive-btn" onclick="showSection('method')">Deep Dive</button>
+            </div>
+
+            <div class="overview-card">
+                <h3>Results & Analysis</h3>
+                <p>Control samples showed zero bacterial colonies. However, food exposed to the floor for 5 seconds showed bacterial growth (2-3 colonies), while 30-second exposure showed increased contamination (4-6 colonies). The floor by the table had the highest bacterial concentration (92-93 colonies).</p>
+                <button class="deep-dive-btn" onclick="showSection('results')">Deep Dive</button>
+            </div>
+
+            <div class="overview-card">
+                <h3>Conclusion</h3>
+                <p>The hypothesis is confirmed: food collects bacteria after just 5 seconds on the floor, disproving the 5 second rule. Bacterial contamination increases with longer exposure time. The 5 second rule is FALSE and poses health risks. People should avoid eating food that has contacted the floor.</p>
+                <button class="deep-dive-btn" onclick="showSection('conclusion')">Deep Dive</button>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <div class="about-box">
+                <h3>About Us</h3>
+                <p>Science Rules is a group of five individuals who are passionate about Science and its mysteries. We are currently working on The effects of Acid Rain. We have also done other projects such as bacteria testing on food . We hope our results will help the future experiments and explorations to come as well. We are doing this as we love Science and we think this can potentially help our careers to come.</p>
+            </div>
+        </div>
+    </div>
+
+    <button class="home-btn" onclick="goToHome()">⌂ Home</button>
+    <button class="back-btn" onclick="showHome()" style="display: none;" id="backBtn">← Back</button>
+
+    <div id="introduction" class="section">
+        <div class="container">
+            <h2 class="section-title">Introduction</h2>
+            
+            <div class="summary-section">
+                <p>The 5 second rule is an urban myth stating that food dropped on the floor is safe to eat if picked up within 5 seconds. This investigation examines whether increasing contact time with the floor increases bacterial contamination, with implications for student health and public food safety practices.</p>
+                <button class="deep-dive-btn" onclick="toggleDeepDive('intro-deep')">Deep Dive</button>
+            </div>
+
+            <div id="intro-deep" class="deep-content">
+                <div class="card">
+                    <h3>The 5 Second Rule: Origins</h3>
+                    <p>The 5 second rule is an <span class="highlight">urban myth</span> stating that if food has been in contact with the floor for less than 5 seconds it is safe to eat.</p>
+                    <p style="margin-top: 1rem;"><span class="highlight">Historical Origin:</span> The rule is thought to originate from Genghis Khan, who declared that dropped food would be fine to eat until he said otherwise. Today, people commonly use this rule in their everyday lives.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Why This Investigation Matters</h3>
+                    <p><span class="highlight">School Context:</span> Student attendance at our school is a significant concern and is decreasing. This is mostly due to illness which could result from eating food with bacteria from floor contact.</p>
+                    <ul style="margin-top: 1rem;">
+                        <li>Investigation addresses declining student attendance</li>
+                        <li>Illness potentially linked to foodborne bacteria</li>
+                        <li>Results can inform public health practices</li>
+                        <li>Widely-used rule needs scientific verification</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Public Health Implications</h3>
+                    <p>This investigation is important for a wider audience as this rule is used commonly. If proved to be false, it could be risking people's health.</p>
+                    <div class="data-box" style="margin-top: 1.5rem; text-align: left;">
+                        <h4>Common Foodborne Bacteria</h4>
+                        <p style="font-size: 1rem;">
+                            • Salmonella<br>
+                            • Campylobacter<br>
+                            • Enterohaemorrhagic Escherichia coli (E. coli)<br><br>
+                            These bacteria affect <span class="highlight">millions of people annually</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Potential Outcomes</h3>
+                    <p><span class="highlight">If Hypothesis is TRUE:</span></p>
+                    <ul>
+                        <li>The 5 second rule is putting people's health at risk</li>
+                        <li>Safety measures need to be reassessed</li>
+                        <li>Students need education about bacterial effects</li>
+                    </ul>
+                    <p style="margin-top: 1.5rem;"><span class="highlight">If Hypothesis is FALSE:</span></p>
+                    <ul>
+                        <li>Student and public safety would be more assured</li>
+                        <li>Could help people with Mysophobia (fear of germs)</li>
+                        <li>Could lead to further research revolutionizing food treatment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="hypothesis" class="section">
+        <div class="container">
+            <h2 class="section-title">Hypothesis</h2>
+            
+            <div class="summary-section">
+                <p>Increasing the length of time food is in contact with the floor increases the number of bacteria on the food. If proven true, this widely-used "rule" poses significant health risks through exposure to pathogens like Salmonella, Campylobacter, and E. coli.</p>
+                <button class="deep-dive-btn" onclick="toggleDeepDive('hypothesis-deep')">Deep Dive</button>
+            </div>
+
+            <div id="hypothesis-deep" class="deep-content">
+                <div class="card">
+                    <h3>Primary Hypothesis</h3>
+                    <div class="data-box" style="text-align: left;">
+                        <h4>Core Statement</h4>
+                        <p style="font-size: 1.2rem; line-height: 1.6;">
+                            Increasing the length of time food is in contact with the floor <span class="highlight">increases the number of bacteria</span> on the food.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Experimental Predictions</h3>
+                    <table>
+                        <tr>
+                            <th>Exposure Time</th>
+                            <th>Expected Bacterial Count</th>
+                            <th>Health Risk</th>
+                        </tr>
+                        <tr>
+                            <td>0 seconds (control)</td>
+                            <td>Zero colonies</td>
+                            <td>None - sterile food</td>
+                        </tr>
+                        <tr>
+                            <td>5 seconds</td>
+                            <td>Measurable colonies</td>
+                            <td>Moderate - bacterial transfer occurs</td>
+                        </tr>
+                        <tr>
+                            <td>30 seconds</td>
+                            <td>Higher colony count</td>
+                            <td>Higher - increased contamination</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>Testing Framework</h3>
+                    <p>To test this hypothesis, we must demonstrate:</p>
+                    <ul>
+                        <li>Control samples remain bacteria-free</li>
+                        <li>5-second exposure shows bacterial growth</li>
+                        <li>30-second exposure shows greater growth than 5 seconds</li>
+                        <li>Bacterial transfer is measurable and quantifiable</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Variables in Testing</h3>
+                    <table>
+                        <tr>
+                            <th>Variable Type</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>Independent</td>
+                            <td>Time in contact with floor (0, 5, 30 seconds)</td>
+                        </tr>
+                        <tr>
+                            <td>Dependent</td>
+                            <td>Number of bacterial colonies grown on agar plates</td>
+                        </tr>
+                        <tr>
+                            <td>Controlled</td>
+                            <td>Food type, drop height (12.5cm), floor location, agar plate conditions, incubation time (1 week)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = null;
+
+        function toggleDeepDive(id) {
+            const content = document.getElementById(id);
+            const summarySection = content.previousElementSibling;
+            
+            // Hide summary, show deep content
+            summarySection.classList.add('hidden');
+            content.classList.add('active');
+            
+            // Show back button
+            document.getElementById('backBtn').style.display = 'block';
+            
+            // Store current section for back button
+            currentSection = content.parentElement.parentElement.id;
+        }
+
+        function showSection(sectionId) {
+            document.getElementById('home').style.display = 'none';
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            document.getElementById('backBtn').style.display = 'block';
+            
+            // Go directly to deep content, skip summary
+            const section = document.getElementById(sectionId);
+            const summary = section.querySelector('.summary-section');
+            const deepContent = section.querySelector('.deep-content');
+            if (summary) summary.classList.add('hidden');
+            if (deepContent) deepContent.classList.add('active');
+            
+            currentSection = sectionId;
+            window.scrollTo(0, 0);
+        }
+
+        function showHome() {
+            // Always go back to home from deep dive
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('home').style.display = 'flex';
+            document.getElementById('backBtn').style.display = 'none';
+            
+            // Reset all deep dives
+            document.querySelectorAll('.deep-content').forEach(d => d.classList.remove('active'));
+            document.querySelectorAll('.summary-section').forEach(s => s.classList.remove('hidden'));
+            
+            currentSection = null;
+            window.scrollTo(0, 0);
+        }
+
+        function goToHome() {
+            // Always go to home page
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('home').style.display = 'flex';
+            document.getElementById('backBtn').style.display = 'none';
+            
+            // Reset all deep dives
+            document.querySelectorAll('.deep-content').forEach(d => d.classList.remove('active'));
+            document.querySelectorAll('.summary-section').forEach(s => s.classList.remove('hidden'));
+            
+            currentSection = null;
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+    <div id="method" class="section">
+        <div class="container">
+            <h2 class="section-title">Methodology</h2>
+            
+            <div class="summary-section">
+                <p>Four experiments were conducted in the school canteen using agar plates and various foods (bread, Crunchies, Lunchables). Food samples were dropped from 12.5cm height onto the floor for 5 and 30 seconds, then cultured on agar plates for one week to count bacterial colonies.</p>
+                <button class="deep-dive-btn" onclick="toggleDeepDive('method-deep')">Deep Dive</button>
+            </div>
+
+            <div id="method-deep" class="deep-content">
+                <div class="card">
+                    <h3>Equipment List</h3>
+                    <ul>
+                        <li>Agar plates (sterile)</li>
+                        <li>Sterile swabs</li>
+                        <li>Lunchables (crackers, chicken, and cheese)</li>
+                        <li>Crunchie chocolate bars</li>
+                        <li>Bread</li>
+                        <li>Cellotape (for sealing)</li>
+                        <li>Sharpie (for labeling)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Experiment 1: Clean Canteen</h3>
+                    <p><span class="highlight">Purpose:</span> Establish baseline bacterial levels in freshly cleaned environment</p>
+                    <table style="margin-top: 1rem;">
+                        <tr>
+                            <th>Step</th>
+                            <th>Procedure</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Received agar plates from lab technician</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Arrived at freshly cleaned canteen</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Each team member received sterile swab</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Assigned areas: table, chair, floor by door, floor by table</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Swabbed assigned areas</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Rolled swabs onto agar plates in squiggly motion</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Sealed petri dishes with cellotape</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Labeled dishes with location information</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>Experiment 2: Dirty Canteen</h3>
+                    <p><span class="highlight">Purpose:</span> Compare bacterial levels before cleaning to determine optimal testing environment</p>
+                    <p style="margin-top: 1rem;">Repeated Experiment 1 protocol before cleaners
