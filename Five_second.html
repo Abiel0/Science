@@ -224,10 +224,9 @@
             left: 0;
         }
 
-        .back-btn {
+        .back-btn, .home-btn {
             position: fixed;
             top: 2rem;
-            left: 2rem;
             padding: 0.8rem 1.5rem;
             background: transparent;
             border: 1px solid #00ff9d;
@@ -239,31 +238,19 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             font-family: 'Courier New', Courier, monospace;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .back-btn:hover {
-            background: #00ff9d;
-            color: #0a0e27;
+        .back-btn {
+            left: 2rem;
         }
 
         .home-btn {
-            position: fixed;
-            top: 2rem;
             right: 2rem;
-            padding: 0.8rem 1.5rem;
-            background: transparent;
-            border: 1px solid #00ff9d;
-            color: #00ff9d;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-family: 'Courier New', Courier, monospace;
         }
 
-        .home-btn:hover {
+        .back-btn:hover, .home-btn:hover {
             background: #00ff9d;
             color: #0a0e27;
         }
@@ -625,13 +612,13 @@
         <div class="about-section">
             <div class="about-box">
                 <h3>About Us</h3>
-                <p>Science Rules is a group of five individuals who are passionate about Science and its mysteries. We are currently working on The effects of Acid Rain. We have also done other projects such as bacteria testing on food . We hope our results will help the future experiments and explorations to come as well. We are doing this as we love Science and we think this can potentially help our careers to come.</p>
+                <p>Science Rules is a group of five individuals who are passionate about Science and its mysteries. We are currently working on The effects of <a href="/Acid_rain">Acid Rain</a>. We have also done other projects such as bacteria testing as well. We hope our results will help the future experiments and explorations to come as well. We are doing this as we love Science and we think this can potentially help our careers to come.</p>
             </div>
         </div>
     </div>
 
-    <button class="home-btn" onclick="goToHome()">⌂ Home</button>
-    <button class="back-btn" onclick="showHome()" style="display: none;" id="backBtn">← Back</button>
+    <a href="/" class="back-btn">⌂ Main</a>
+    <a href="#" class="home-btn" onclick="goToHome(); return false;">← Home</a>
 
     <div id="introduction" class="section">
         <div class="container">
@@ -775,70 +762,6 @@
         </div>
     </div>
 
-    <script>
-        let currentSection = null;
-
-        function toggleDeepDive(id) {
-            const content = document.getElementById(id);
-            const summarySection = content.previousElementSibling;
-            
-            // Hide summary, show deep content
-            summarySection.classList.add('hidden');
-            content.classList.add('active');
-            
-            // Show back button
-            document.getElementById('backBtn').style.display = 'block';
-            
-            // Store current section for back button
-            currentSection = content.parentElement.parentElement.id;
-        }
-
-        function showSection(sectionId) {
-            document.getElementById('home').style.display = 'none';
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            document.getElementById('backBtn').style.display = 'block';
-            
-            // Go directly to deep content, skip summary
-            const section = document.getElementById(sectionId);
-            const summary = section.querySelector('.summary-section');
-            const deepContent = section.querySelector('.deep-content');
-            if (summary) summary.classList.add('hidden');
-            if (deepContent) deepContent.classList.add('active');
-            
-            currentSection = sectionId;
-            window.scrollTo(0, 0);
-        }
-
-        function showHome() {
-            // Always go back to home from deep dive
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById('home').style.display = 'flex';
-            document.getElementById('backBtn').style.display = 'none';
-            
-            // Reset all deep dives
-            document.querySelectorAll('.deep-content').forEach(d => d.classList.remove('active'));
-            document.querySelectorAll('.summary-section').forEach(s => s.classList.remove('hidden'));
-            
-            currentSection = null;
-            window.scrollTo(0, 0);
-        }
-
-        function goToHome() {
-            // Always go to home page
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById('home').style.display = 'flex';
-            document.getElementById('backBtn').style.display = 'none';
-            
-            // Reset all deep dives
-            document.querySelectorAll('.deep-content').forEach(d => d.classList.remove('active'));
-            document.querySelectorAll('.summary-section').forEach(s => s.classList.remove('hidden'));
-            
-            currentSection = null;
-            window.scrollTo(0, 0);
-        }
-    </script>
-
     <div id="method" class="section">
         <div class="container">
             <h2 class="section-title">Methodology</h2>
@@ -908,4 +831,400 @@
                 <div class="card">
                     <h3>Experiment 2: Dirty Canteen</h3>
                     <p><span class="highlight">Purpose:</span> Compare bacterial levels before cleaning to determine optimal testing environment</p>
-                    <p style="margin-top: 1rem;">Repeated Experiment 1 protocol before cleaners
+                    <p style="margin-top: 1rem;">Repeated Experiment 1 protocol before cleaners had cleaned the canteen. This experiment helped determine whether the clean or dirty canteen would provide sufficient bacterial growth for data collection.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Experiment 3: Crunchies and Bread</h3>
+                    <p><span class="highlight">Purpose:</span> Test food types and methodology for conducting food contamination tests</p>
+                    <table style="margin-top: 1rem;">
+                        <tr>
+                            <th>Step</th>
+                            <th>Procedure</th>
+                        </tr>
+                        <tr>
+                            <td>1-3</td>
+                            <td>Repeated steps 1-3 from Experiment 1</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Dropped 1cm³ of bread and Crunchies onto floor by table from height of 12.5cm for 5 seconds</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Placed samples on petri dishes for 5 seconds</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Sealed petri dishes with cellotape</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Repeated procedure for 30 seconds exposure</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>After 1 week, returned and recorded results</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>Experiments 4 & 5: Lunchables Testing</h3>
+                    <p><span class="highlight">Purpose:</span> Test hypothesis on each component of Lunchables (crackers, cheese, ham)</p>
+                    <p style="margin-top: 1rem;">Same method as Experiment 3 was used, testing individual Lunchables components for bacterial contamination at 5 and 30 second intervals.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Risk Assessment</h3>
+                    <table>
+                        <tr>
+                            <th>Hazard</th>
+                            <th>Potential Consequence</th>
+                            <th>Risk Level (1-10)</th>
+                            <th>Mitigation Strategy</th>
+                        </tr>
+                        <tr>
+                            <td>Bacteria growth</td>
+                            <td>Bacterial growth on food</td>
+                            <td>3</td>
+                            <td>Using agar plates carefully</td>
+                        </tr>
+                        <tr>
+                            <td>Scalpel</td>
+                            <td>Cut someone</td>
+                            <td>1</td>
+                            <td>Resistant gloves or being careful</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="results" class="section">
+        <div class="container">
+            <h2 class="section-title">Results & Analysis</h2>
+            
+            <div class="summary-section">
+                <p>Control samples showed zero bacterial colonies. However, food exposed to the floor for 5 seconds showed bacterial growth (2-3 colonies), while 30-second exposure showed increased contamination (4-6 colonies). The floor by the table had the highest bacterial concentration (92-93 colonies).</p>
+                <button class="deep-dive-btn" onclick="toggleDeepDive('results-deep')">Deep Dive</button>
+            </div>
+
+            <div id="results-deep" class="deep-content">
+                <div class="card">
+                    <h3>Experiment 1: Clean Canteen Results</h3>
+                    <table>
+                        <tr>
+                            <th>Location</th>
+                            <th>Number of Colonies</th>
+                        </tr>
+                        <tr>
+                            <td>Floor by door</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>Indoor door</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>Seat</td>
+                            <td>53</td>
+                        </tr>
+                        <tr>
+                            <td>Floor by table</td>
+                            <td>93</td>
+                        </tr>
+                        <tr>
+                            <td>Table</td>
+                            <td>3</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>Experiment 2: Dirty Canteen Results</h3>
+                    <table>
+                        <tr>
+                            <th>Location</th>
+                            <th>Number of Colonies</th>
+                        </tr>
+                        <tr>
+                            <td>Floor by door</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>Indoor door</td>
+                            <td>29</td>
+                        </tr>
+                        <tr>
+                            <td>Seat</td>
+                            <td>44</td>
+                        </tr>
+                        <tr>
+                            <td>Floor by table</td>
+                            <td>92</td>
+                        </tr>
+                        <tr>
+                            <td>Table</td>
+                            <td>3</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>Experiment 3: Crunchies and Bread Results</h3>
+                    <table>
+                        <tr>
+                            <th>Sample</th>
+                            <th>Number of Colonies</th>
+                        </tr>
+                        <tr>
+                            <td>Bread control</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Bread 5 seconds</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Bread 30 seconds</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Crunchie control</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Crunchie 5 seconds</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Crunchie 30 seconds</td>
+                            <td>0</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>Experiments 4 & 5: Lunchables Results</h3>
+                    <table>
+                        <tr>
+                            <th>Sample</th>
+                            <th>Number of Colonies</th>
+                        </tr>
+                        <tr>
+                            <td>Cheese control</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Ham control</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Cracker control</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Cheese 5 seconds</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Ham 5 seconds</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Cracker 5 seconds</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Cheese 30 seconds</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>Ham 30 seconds</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>Crackers 30 seconds</td>
+                            <td>5</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>Key Findings</h3>
+                    <div class="data-box" style="text-align: left;">
+                        <h4>Control Samples</h4>
+                        <p style="font-size: 1rem;">All control samples showed <span class="highlight">ZERO bacterial colonies</span>, confirming food was sterile before floor contact.</p>
+                    </div>
+                    <div class="data-box" style="margin-top: 1rem; text-align: left;">
+                        <h4>5 Second Exposure</h4>
+                        <p style="font-size: 1rem;">Bacterial growth detected: <span class="highlight">2-3 colonies</span> across all Lunchables components.</p>
+                    </div>
+                    <div class="data-box" style="margin-top: 1rem; text-align: left;">
+                        <h4>30 Second Exposure</h4>
+                        <p style="font-size: 1rem;">Increased bacterial growth: <span class="highlight">4-6 colonies</span>, demonstrating time-dependent contamination.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Discussion</h3>
+                    <p><span class="highlight">Location Selection:</span> The canteen was chosen as the most likely place for someone to drop their food. The 'dirty canteen' was tested over the clean because it represents a realistic environment when people are more likely to drop food. Data from experiments one and two showed the dirty floor had greater bacterial concentration, providing more data.</p>
+                    
+                    <p style="margin-top: 1rem;"><span class="highlight">Floor Location:</span> The 'floor by table' location was chosen as data showed it had the greatest number of bacterial colonies (92-93), giving bacteria the best chance to grow and representing the most likely area for food to be dropped.</p>
+                    
+                    <p style="margin-top: 1rem;"><span class="highlight">Control Experiments:</span> Controls were conducted for each food to ensure there were no bacteria already present on the food before floor contact.</p>
+                    
+                    <p style="margin-top: 1rem;"><span class="highlight">30 Second Testing:</span> Extended exposure time was tested to investigate whether further bacterial growth would occur over a longer period.</p>
+                    
+                    <p style="margin-top: 1rem;"><span class="highlight">Food Selection Rationale:</span> Lunchables were chosen over Crunchies because:</p>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Crunchies are hard to cut, resulting in non-controlled sizes</li>
+                        <li>Crunchie results showed no bacterial pickup using our methods</li>
+                        <li>Floor may have been recently cleaned during preparation</li>
+                        <li>Lunchables are in airtight packaging, ensuring sterility</li>
+                        <li>Lunchables components are pre-cut to controlled sizes</li>
+                        <li>Commonly consumed by students</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="conclusion" class="section">
+        <div class="container">
+            <h2 class="section-title">Conclusion</h2>
+            
+            <div class="summary-section">
+                <p>The hypothesis is confirmed: food collects bacteria after just 5 seconds on the floor, disproving the 5 second rule. Bacterial contamination increases with longer exposure time. The 5 second rule is FALSE and poses health risks. People should avoid eating food that has contacted the floor.</p>
+                <button class="deep-dive-btn" onclick="toggleDeepDive('conclusion-deep')">Deep Dive</button>
+            </div>
+
+            <div id="conclusion-deep" class="deep-content">
+                <div class="card">
+                    <h3>Hypothesis Confirmed</h3>
+                    <p>Our research has shown that our hypothesis is <span class="highlight">TRUE</span>: after 5 seconds, food does indeed collect bacteria from the floor, making the 5 second rule false.</p>
+                    
+                    <div class="data-box" style="margin-top: 1.5rem; text-align: left;">
+                        <h4>Evidence</h4>
+                        <p style="font-size: 1rem;">
+                            • Bacterial growth detected on agar plates after 5 seconds<br>
+                            • Food is unsafe for human consumption after floor contact<br>
+                            • Contamination increases with longer exposure time<br>
+                            • After 30 seconds, food showed significantly more bacteria
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>The 5 Second Rule is FALSE</h3>
+                    <p>Since bacterial growth was observed on agar plates after just 5 seconds of floor contact, the food becomes unsafe for human consumption. This disproves the popular belief that food is safe if picked up quickly.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Health Implications</h3>
+                    <p>People should be <span class="highlight">more careful</span> when considering eating food off the floor, as it is not clean and could transmit diseases.</p>
+                    
+                    <ul style="margin-top: 1rem;">
+                        <li>Floor surfaces harbor significant bacterial populations</li>
+                        <li>Bacterial transfer is immediate, not time-dependent for safety</li>
+                        <li>Longer contact increases contamination levels</li>
+                        <li>Common foodborne pathogens can cause serious illness</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Practical Applications</h3>
+                    <p>This information could be used to <span class="highlight">prevent food poisoning</span> in humans due to this common misconception.</p>
+                    
+                    <div class="data-box" style="margin-top: 1.5rem; text-align: left;">
+                        <h4>Recommendations</h4>
+                        <p style="font-size: 1rem;">
+                            • Educate students about bacterial contamination risks<br>
+                            • Reassess food safety measures in schools<br>
+                            • Inform the public that the 5 second rule is a myth<br>
+                            • Promote proper food handling practices<br>
+                            • Discard food that has contacted floor surfaces
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Impact on Student Attendance</h3>
+                    <p>By educating students about the dangers of the 5 second rule, we can potentially:</p>
+                    <ul>
+                        <li>Reduce foodborne illness cases</li>
+                        <li>Improve school attendance rates</li>
+                        <li>Promote better hygiene practices</li>
+                        <li>Create a healthier learning environment</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Future Research</h3>
+                    <p>This investigation opens possibilities for further research:</p>
+                    <ul>
+                        <li>Testing different surface types (carpet, tile, wood)</li>
+                        <li>Investigating bacterial species present on floors</li>
+                        <li>Examining moisture content's effect on transfer</li>
+                        <li>Testing various food textures and compositions</li>
+                        <li>Studying bacterial transfer at sub-5 second intervals</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = null;
+
+        function toggleDeepDive(id) {
+            const content = document.getElementById(id);
+            const summarySection = content.previousElementSibling;
+            
+            summarySection.classList.add('hidden');
+            content.classList.add('active');
+            
+            currentSection = content.parentElement.parentElement.id;
+        }
+
+        function showSection(sectionId) {
+            document.getElementById('home').style.display = 'none';
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            const section = document.getElementById(sectionId);
+            const summary = section.querySelector('.summary-section');
+            const deepContent = section.querySelector('.deep-content');
+            if (summary) summary.classList.add('hidden');
+            if (deepContent) deepContent.classList.add('active');
+            
+            currentSection = sectionId;
+            window.scrollTo(0, 0);
+        }
+
+        function showHome() {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('home').style.display = 'flex';
+            
+            document.querySelectorAll('.deep-content').forEach(d => d.classList.remove('active'));
+            document.querySelectorAll('.summary-section').forEach(s => s.classList.remove('hidden'));
+            
+            currentSection = null;
+            window.scrollTo(0, 0);
+        }
+
+        function goToHome() {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('home').style.display = 'flex';
+            
+            document.querySelectorAll('.deep-content').forEach(d => d.classList.remove('active'));
+            document.querySelectorAll('.summary-section').forEach(s => s.classList.remove('hidden'));
+            
+            currentSection = null;
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
