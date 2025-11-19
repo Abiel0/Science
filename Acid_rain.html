@@ -251,6 +251,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             font-family: 'Courier New', Courier, monospace;
+            text-decoration: none;
         }
 
         .back-btn:hover {
@@ -545,6 +546,7 @@
                 top: 1rem;
                 padding: 0.6rem 1rem;
                 font-size: 0.75rem;
+                text-decoration: none
             }
             .back-btn {
                 left: 1rem;
@@ -644,13 +646,14 @@
         <div class="about-section">
             <div class="about-box">
                 <h3>About Us</h3>
-                <p>Science Rules is a group of five individuals who are passionate about Science and its mysteries. We are currently working on The effects of Acid Rain. We have also done other projects such as bacteria testing on food. We hope our results will help the future experiments and explorations to come as well. We are doing this as we love Science and we think this can potentially help our careers to come.</p>
+                <p>Science Rules is a group of five individuals who are passionate about Science and its mysteries. We are currently working on The effects of Acid Rain. We have also done other projects such as <a href="/Five_second">bacteria testing</a> as well. We hope our results will help the future experiments and explorations to come as well. We are doing this as we love Science and we think this can potentially help our careers to come.</p>
             </div>
         </div>
     </div>
 
-    <a href="/" class="back-btn" id="mainBtn">⌂ Main</a>
     <button class="home-btn" onclick="goToHome()">← Home</button>
+    <button class="back-btn" onclick="showHome()" style="display: none;" id="backBtn">← Back</button>
+    <a href="/" class="back-btn" id="mainBtn">⌂ Main</a>
 
     <div id="introduction" class="section">
         <div class="container">
