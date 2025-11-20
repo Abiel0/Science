@@ -469,104 +469,155 @@
         }
 
         @media (max-width: 1024px) {
-            .container {
-                padding: 0 1.5rem;
-            }
-            .grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-            table {
-                font-size: 0.9rem;
-            }
-            table th, table td {
-                padding: 0.8rem;
-            }
+        .container {
+            padding: 0 1.5rem;
         }
+        .grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        table {
+            font-size: 0.9rem;
+        }
+        table th, table td {
+            padding: 0.8rem;
+        }
+        h1 {
+            font-size: 2rem;
+        }
+        .section-title {
+            font-size: 2rem;
+        }
+    }
 
-        @media (max-width: 768px) {
-            h1 { 
-                font-size: 1.5rem; 
-                letter-spacing: 1px;
-            }
-            .logo {
-                font-size: 1.2rem;
-                letter-spacing: 4px;
-                padding: 0.8rem 1.5rem;
-            }
-            .section-title { 
-                font-size: 1.5rem;
-                letter-spacing: 2px;
-            }
-            .nav-btn { 
-                padding: 0.8rem 1.2rem; 
-                font-size: 0.75rem;
-                letter-spacing: 1px;
-            }
-            .card {
-                padding: 1.5rem;
-            }
-            .card h3 {
-                font-size: 1.1rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            .back-btn, .home-btn {
-                top: 1rem;
-                padding: 0.6rem 1rem;
-                font-size: 0.75rem;
-            }
-            .back-btn {
-                left: 1rem;
-            }
-            .home-btn {
-                right: 1rem;
-            }
-            .overview-card {
-                padding: 1.5rem;
-            }
-            .overview-card h3 {
-                font-size: 1.2rem;
-            }
-            .home-overview {
-                padding: 0 1rem;
-            }
-            .about-section {
-                padding: 0 1rem 2rem;
-            }
-            table {
-                font-size: 0.75rem;
-            }
-            table th, table td {
-                padding: 0.5rem;
-            }
-            .section {
-                padding: 2rem 1rem;
-            }
+    @media (max-width: 768px) {
+        h1 { 
+            font-size: 1.8rem; 
+            letter-spacing: 1px;
         }
+        .logo {
+            font-size: 1.3rem;
+            letter-spacing: 4px;
+            padding: 0.8rem 1.5rem;
+        }
+        .section-title { 
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+        .subtitle {
+            font-size: 0.95rem;
+        }
+        .nav-btn { 
+            padding: 0.9rem 1.5rem; 
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        .card {
+            padding: 1.5rem;
+        }
+        .card h3 {
+            font-size: 1.2rem;
+        }
+        .card p, .card li {
+            font-size: 1rem;
+        }
+        .grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        .back-btn, .home-btn {
+            top: 1rem;
+            padding: 0.7rem 1.2rem;
+            font-size: 0.8rem;
+        }
+        .back-btn {
+            left: 1rem;
+        }
+        .home-btn {
+            right: 1rem;
+        }
+        .overview-card {
+            padding: 1.8rem;
+        }
+        .overview-card h3 {
+            font-size: 1.4rem;
+        }
+        .overview-card p {
+            font-size: 1rem;
+        }
+        .home-overview {
+            padding: 0 1rem;
+        }
+        .about-section {
+            padding: 0 1rem 2rem;
+        }
+        .about-box p {
+            font-size: 1rem;
+        }
+        table {
+            font-size: 0.85rem;
+        }
+        table th, table td {
+            padding: 0.7rem;
+        }
+        .section {
+            padding: 2rem 1rem;
+        }
+        .deep-dive-btn {
+            font-size: 0.85rem;
+        }
+        .data-box h4 {
+            font-size: 0.95rem;
+        }
+        .data-box p {
+            font-size: 1.8rem;
+        }
+    }
 
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.2rem;
-            }
-            .subtitle {
-                font-size: 0.8rem;
-            }
-            .nav {
-                gap: 0.5rem;
-            }
-            .nav-btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.7rem;
-            }
-            .section-title {
-                font-size: 1.2rem;
-            }
-            .card h3 {
-                font-size: 1rem;
-            }
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 1.4rem;
         }
+        .subtitle {
+            font-size: 0.85rem;
+        }
+        .nav {
+            gap: 0.5rem;
+        }
+        .nav-btn {
+            padding: 0.75rem 1.2rem;
+            font-size: 0.75rem;
+        }
+        .section-title {
+            font-size: 1.4rem;
+        }
+        .card h3 {
+            font-size: 1.1rem;
+        }
+        .card p, .card li {
+            font-size: 0.95rem;
+        }
+        .overview-card h3 {
+            font-size: 1.2rem;
+        }
+        .overview-card p {
+            font-size: 0.95rem;
+        }
+        .about-box h3 {
+            font-size: 1.2rem;
+        }
+        .about-box p {
+            font-size: 0.95rem;
+        }
+        table {
+            font-size: 0.8rem;
+        }
+        table th, table td {
+            padding: 0.6rem 0.4rem;
+        }
+        .data-box p {
+            font-size: 1.5rem;
+        }
+    }
     </style>
 </head>
 <body>
