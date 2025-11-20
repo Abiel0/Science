@@ -503,6 +503,9 @@
             }
             table {
                 font-size: 0.9rem;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
             }
             table th, table td {
                 padding: 0.8rem;
@@ -510,43 +513,54 @@
         }
 
         @media (max-width: 768px) {
+            .hero {
+                min-height: 100vh;
+                padding: 6rem 1.5rem 2rem;
+            }
             h1 { 
-                font-size: 1.5rem; 
+                font-size: 2rem; 
                 letter-spacing: 1px;
+                line-height: 1.3;
             }
             .logo {
-                font-size: 1.2rem;
-                letter-spacing: 4px;
-                padding: 0.8rem 1.5rem;
+                font-size: 1.1rem;
+                letter-spacing: 3px;
+                padding: 0.7rem 1.2rem;
+                margin-bottom: 2rem;
             }
             .section-title { 
-                font-size: 1.5rem;
+                font-size: 2rem;
                 letter-spacing: 2px;
             }
             .nav-btn { 
-                padding: 0.8rem 1.2rem; 
-                font-size: 0.75rem;
+                padding: 0.9rem 1.3rem; 
+                font-size: 0.9rem;
                 letter-spacing: 1px;
             }
             .card {
                 padding: 1.5rem;
             }
             .card h3 {
-                font-size: 1.1rem;
+                font-size: 1.3rem;
+            }
+            .card p, .card li {
+                font-size: 1.05rem;
+                line-height: 1.7;
             }
             .grid {
                 grid-template-columns: 1fr;
-                gap: 1rem;
+                gap: 1.5rem;
             }
             .formula {
-                font-size: 1rem;
+                font-size: 1.1rem;
                 padding: 1rem;
+                overflow-x: auto;
             }
             .back-btn, .home-btn {
                 top: 1rem;
-                padding: 0.6rem 1rem;
-                font-size: 0.75rem;
-                text-decoration: none
+                padding: 0.7rem 1.1rem;
+                font-size: 0.8rem;
+                letter-spacing: 1px;
             }
             .back-btn {
                 left: 1rem;
@@ -558,47 +572,171 @@
                 padding: 1.5rem;
             }
             .overview-card h3 {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
+            }
+            .overview-card p {
+                font-size: 1.05rem;
+                line-height: 1.7;
             }
             .home-overview {
                 padding: 0 1rem;
+                margin: 2rem auto;
             }
             .about-section {
                 padding: 0 1rem 2rem;
+                margin: 2rem auto 1rem;
+            }
+            .about-box p {
+                font-size: 1.05rem;
+                line-height: 1.7;
             }
             table {
-                font-size: 0.75rem;
+                font-size: 0.9rem;
+                display: block;
+                overflow-x: auto;
             }
             table th, table td {
-                padding: 0.5rem;
+                padding: 0.7rem;
+                min-width: 100px;
             }
             .section {
-                padding: 2rem 1rem;
+                padding: 6rem 1rem 2rem;
+            }
+            .data-box h4 {
+                font-size: 0.95rem;
+            }
+            .data-box p {
+                font-size: 1.6rem;
+            }
+            .deep-dive-btn {
+                padding: 0.9rem 1.5rem;
+                font-size: 0.95rem;
+            }
+            .subtitle {
+                font-size: 0.95rem;
             }
         }
 
         @media (max-width: 480px) {
+            .hero {
+                padding: 5rem 1rem 2rem;
+            }
             h1 {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
+                line-height: 1.4;
+            }
+            .logo {
+                font-size: 0.95rem;
+                letter-spacing: 2px;
+                padding: 0.6rem 1rem;
             }
             .subtitle {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
+                letter-spacing: 1px;
             }
             .nav {
                 gap: 0.5rem;
             }
             .nav-btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.7rem;
+                padding: 0.8rem 1rem;
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+            }
+            .section-title {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .card h3 {
+                font-size: 1.15rem;
+                margin-bottom: 1rem;
+            }
+            .card p, .card li {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+            .formula {
+                font-size: 0.95rem;
+                padding: 0.8rem;
+                letter-spacing: 1px;
+            }
+            .overview-card {
+                padding: 1.2rem;
+            }
+            .overview-card h3 {
+                font-size: 1.25rem;
+            }
+            .overview-card p {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+            .about-box {
+                padding: 1.2rem;
+            }
+            .about-box h3 {
+                font-size: 1.25rem;
+            }
+            .about-box p {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+            .section {
+                padding: 5rem 0.8rem 2rem;
+            }
+            table {
+                font-size: 0.85rem;
+            }
+            table th, table td {
+                padding: 0.6rem;
+                min-width: 80px;
+            }
+            .data-box {
+                padding: 0.8rem;
+            }
+            .data-box h4 {
+                font-size: 0.85rem;
+            }
+            .data-box p {
+                font-size: 1.3rem;
+            }
+            .deep-dive-btn {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.85rem;
+            }
+            .back-btn, .home-btn {
+                padding: 0.6rem 0.9rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            h1 {
+                font-size: 1.1rem;
+            }
+            .logo {
+                font-size: 0.75rem;
+                padding: 0.5rem 0.8rem;
+            }
+            .nav-btn {
+                padding: 0.6rem 0.7rem;
+                font-size: 0.65rem;
             }
             .section-title {
                 font-size: 1.2rem;
             }
-            .card h3 {
-                font-size: 1rem;
+            .card {
+                padding: 1rem;
             }
-            .formula {
+            .card h3 {
+                font-size: 0.95rem;
+            }
+            .card p, .card li {
                 font-size: 0.85rem;
+            }
+            .overview-card, .about-box {
+                padding: 1rem;
             }
         }
     </style>
